@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15
+    container_name: smsdb
+    environment:
+      POSTGRES_USER: sms_user
+      POSTGRES_PASSWORD: sms_pass
+      POSTGRES_DB: smsdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - default
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "sms_user", "-d", "smsdb"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 5s
+
+  app:
+    build: .
+    container_name: sms_api
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy  # Espera o serviço do banco ficar "saudável"
+    environment:
+      - DATABASE_URL=postgresql://sms_user:sms_pass@smsdb:5432/smsdb
+    networks:
+      - default
+
+volumes:
+  pgdata:
+
+networks:
+  default:
+    driver: bridge
