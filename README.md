@@ -1,6 +1,4 @@
-Claro! Aqui está um modelo básico de **README.md** para o seu projeto de mensageria com IA.
 
----
 
 # **Mensageria Inteligente com IA**
 
