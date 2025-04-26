@@ -1,17 +1,19 @@
 # Python cache files
-__pycache__/
+**/__pycache__/
 *.pyc
 *.pyo
 *.pyd
 *.pdb
 
-# Environment variables
+# Environment variables file
 .env
 
 # Virtual environment folder
-.venv/
+**/venv/
 
-# Docker files (if you don't want them to be included in Git)
+# Docker related files
+docker-compose.yml
+Dockerfile
 *.log
 *.db
 
@@ -26,3 +28,19 @@ Thumbs.db
 
 # JetBrains specific files
 .idea/
+
+# Miscellaneous temporary files
+*.swp
+*.swo
+*.bak
+
+# Alembic migrations folder (if you do not want to version Alembic migrations)
+migrations/
+alembic.ini
+
+# Compiled build files
+*.egg-info/
+*.eggs/
+dist/
+build/
+*.tar.gz

@@ -6,3 +6,4 @@ python-dotenv
 pytest
 httpx
 uvicorn[standard]
+twilio

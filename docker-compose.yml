@@ -34,6 +34,7 @@ services:
         condition: service_healthy  # Espera o serviço do banco ficar "saudável"
     environment:
       - DATABASE_URL=postgresql://sms_user:sms_pass@smsdb:5432/smsdb
+      - PYTHONPATH=/code
     networks:
       - default
 

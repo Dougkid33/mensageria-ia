@@ -1,18 +1,20 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
-import datetime
+from sqlalchemy import Column, ForeignKey, Integer, String, DateTime
+from sqlalchemy.orm import relationship
+from app.db.session import Base
 
-Base = declarative_base()
-
-class Contato(Base):
+class ContatoDB(Base):
     __tablename__ = 'contatos'
-    id = Column(Integer, primary_key=True)
-    nome = Column(String)
-    telefone = Column(String, unique=True)
 
-class Agendamento(Base):
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    nome = Column(String, nullable=False)
+    telefone = Column(String, nullable=False)
+    agendamentos = relationship('AgendamentoDB', back_populates='contato')
+
+class AgendamentoDB(Base):
     __tablename__ = 'agendamentos'
-    id = Column(Integer, primary_key=True)
-    contato_id = Column(Integer, ForeignKey("contatos.id"))
-    horario_envio = Column(DateTime, default=datetime.datetime.utcnow)
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    contato_id = Column(Integer, ForeignKey('contatos.id'), nullable=False)
+    horario_envio = Column(DateTime, nullable=False)
     status = Column(String, default="pendente")
+    contato = relationship('ContatoDB', back_populates='agendamentos')
