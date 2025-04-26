@@ -9,7 +9,7 @@
 .env
 
 # Virtual environment folder
-**/venv/
+/venv/
 
 # Docker related files
 docker-compose.yml
