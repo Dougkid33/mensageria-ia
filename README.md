@@ -1,5 +1,3 @@
-Claro! Vou reformular o README, removendo as partes sobre o Twilio e aplicando as informações relevantes sobre o **UltraMsg**. Aqui está uma sugestão para o seu arquivo `README.md`:
-
 ---
 
 # SMS API com UltraMsg
