@@ -1,7 +1,14 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from app.config import DATABASE_URL
+import os
+from dotenv import load_dotenv
+
+# Carrega as variáveis de ambiente
+load_dotenv()
+
+# Obtém a URL do banco de dados a partir do .env
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 # Criação do engine para se conectar ao banco de dados
 engine = create_engine(DATABASE_URL)
@@ -17,5 +24,7 @@ def get_db():
     db = SessionLocal()
     try:
         yield db
+    except Exception as e:
+        print(f"Erro ao acessar o banco de dados: {str(e)}")
     finally:
         db.close()

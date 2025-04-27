@@ -7,3 +7,5 @@ pytest
 httpx
 uvicorn[standard]
 twilio
+APScheduler==3.11.0
+pytz

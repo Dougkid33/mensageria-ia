@@ -12,12 +12,13 @@ class ContatoResponse(ContatoBase):
     id: int
     
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class AgendamentoBase(BaseModel):
     contato_id: int
     horario_envio: datetime
     status: str = "pendente"
+    mensagem: str 
 
 class AgendamentoCreate(AgendamentoBase):
     pass
@@ -26,7 +27,7 @@ class AgendamentoResponse(AgendamentoBase):
     id: int
     
     class Config:
-        orm_mode = True
+        from_attributes = True
         
 class SMSSend(BaseModel):
     telefone: str

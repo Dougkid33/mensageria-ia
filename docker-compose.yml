@@ -13,7 +13,7 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
-      - default
+      - app-network  # Defina a rede aqui
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "sms_user", "-d", "smsdb"]
       interval: 10s
@@ -31,16 +31,16 @@ services:
       - "8000:8000"
     depends_on:
       db:
-        condition: service_healthy  # Espera o serviço do banco ficar "saudável"
+        condition: service_healthy
     environment:
       - DATABASE_URL=postgresql://sms_user:sms_pass@smsdb:5432/smsdb
       - PYTHONPATH=/code
     networks:
-      - default
+      - app-network  # Defina a rede aqui
 
 volumes:
   pgdata:
 
 networks:
-  default:
+  app-network:  # Defina a rede compartilhada
     driver: bridge

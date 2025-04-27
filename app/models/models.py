@@ -17,4 +17,7 @@ class AgendamentoDB(Base):
     contato_id = Column(Integer, ForeignKey('contatos.id'), nullable=False)
     horario_envio = Column(DateTime, nullable=False)
     status = Column(String, default="pendente")
+    mensagem = Column(String, nullable=False)  # Coluna para armazenar a mensagem
+
+    # Relacionamento com o contato
     contato = relationship('ContatoDB', back_populates='agendamentos')
